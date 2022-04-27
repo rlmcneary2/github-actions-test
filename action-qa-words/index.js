@@ -1,8 +1,8 @@
-const core = require("@actions/core");
-const github = require("@actions/github");
+import core from "@actions/core";
+import { context } from "@actions/github";
 
 try {
-  core.debug(github.context);
+  core.debug(context);
   core.setOutput("issueId", "1");
 } catch (err) {
   core.setFailed(err.message);
