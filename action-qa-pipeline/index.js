@@ -10,7 +10,7 @@ function main() {
 
     core.info(`ids=${JSON.stringify(ids)}`);
 
-    core.setOutput("issueIds", issueIds.join(","));
+    core.setOutput("issueIds", issueIds);
   } catch (err) {
     core.setFailed(err.message);
   }
