@@ -6,13 +6,15 @@ jobs:
   qa-words-job:
     runs-on: ubuntu-latest
     steps:
-      # To use this repository's private action,
-      # you must check out the repository
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: qa-words action step
-        uses: ./action-qa-words # Uses an action in the root directory
-        id: qa-words
-      # Use the output from the `hello` step
-      - name: print the issue ID
-        run: echo "Issue ID='${{ steps.qa-words.outputs.issueId }}'"
+      - name: test
+      - run: echo "Step ran."
+      # # To use this repository's private action,
+      # # you must check out the repository
+      # - name: Checkout
+      #   uses: actions/checkout@v3
+      # - name: qa-words action step
+      #   uses: ./action-qa-words # Uses an action in the root directory
+      #   id: qa-words
+      # # Use the output from the `hello` step
+      # - name: print the issue ID
+      #   run: echo "Issue ID='${{ steps.qa-words.outputs.issueId }}'"
