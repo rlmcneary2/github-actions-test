@@ -16,7 +16,7 @@ function main() {
     // example: "qa #1234"
     // example "QA bafsllc/clearwater#1234"
     // example "qa #1234, QA bafsllc/clearwater#1234"
-    const matches = /qa[^\S\r\n]+[\w/]*#([1-9]+)/dgi.exec(body);
+    const matches = /qa[^\S\r\n]+[\w\/]*#([1-9]+)/gi.exec(body);
     core.info(`matches=${JSON.stringify(matches)}`);
 
     if (matches?.length < 2) {
