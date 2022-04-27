@@ -18,8 +18,9 @@ function main() {
     // example "qa #1234, QA bafsllc/clearwater#1234"
     const regex = /qa[^\S\r\n]+[\w\/]*#([1-9]+)/gi;
     const allMatches = [];
+    let matches;
     do {
-      const matches = regex.exec(body);
+      matches = regex.exec(body);
       if (matches) {
         allMatches.push(matches);
       }
