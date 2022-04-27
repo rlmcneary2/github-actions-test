@@ -1,1 +1,7 @@
-
+on:
+  push:
+    branches:
+      - master
+jobs:
+  qa-words:
+    runs-on: ubuntu-latest
