@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: test
-      - run: echo "Step ran."
+        run: echo "Step ran."
       # # To use this repository's private action,
       # # you must check out the repository
       # - name: Checkout
