@@ -2,3 +2,4 @@ This is a test file.
 Adding line 2.
 Adding line 3.
 Add line 4.
+Line cinco.
