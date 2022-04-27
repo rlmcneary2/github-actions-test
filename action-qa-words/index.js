@@ -33,9 +33,6 @@ function main() {
       return;
     }
 
-    // const arrMatches = Array.from(matches);
-    // core.info(`arrMatches=${JSON.stringify(arrMatches)}`);
-
     const issueIds = [];
     while (allMatches.length) {
       const match = allMatches.shift();
