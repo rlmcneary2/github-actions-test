@@ -6,7 +6,7 @@ description: 'Does PR description contain "qa" words (like "closing" words).'
 #     required: true
 #     default: "World"
 outputs:
-  issueId: # id of output
+  issueIds: # CSV of qa issues.
     description: "The issue to move to the QA pipeline."
 runs:
   using: "node16"

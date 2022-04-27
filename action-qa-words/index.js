@@ -12,26 +12,27 @@ function main() {
     } = context;
     core.info(`body='${body}'`);
 
-    // const matches = /#([1-9]+)/.exec(body);
-    // core.info(`matches=${JSON.stringify(matches)}`);
-
-    // if (matches.length < 2) {
-    //   core.setOutput("issueId", "");
-    //   return;
-    // }
-
     // Is there a QA word related to the issue #?
-    // qa #1234
-    // QA bafsllc/clearwater#1234
-    const matches = /qa[^\S\r\n]+[\w/]*#([1-9]+)/gi.exec(body);
+    // example: "qa #1234"
+    // example "QA bafsllc/clearwater#1234"
+    const matches = /qa[^\S\r\n]+[\w/]*#([1-9]+)/dgi.exec(body);
     core.info(`matches=${JSON.stringify(matches)}`);
 
-    if (matches.length < 2) {
+    if (matches?.length < 2) {
       core.setOutput("issueId", "");
       return;
     }
 
-    core.setOutput("issueId", matches[1]);
+    const arrMatches = Array.from(matches);
+    core.info(`arrMatches=${JSON.stringify(arrMatches)}`);
+
+    const issueIds = [];
+    while (arrMatches.length) {
+      arrMatches.shift();
+      issueIds.push(arrMatches.shift());
+    }
+
+    core.setOutput("issueIds", issueIds.join(","));
   } catch (err) {
     core.setFailed(err.message);
   }

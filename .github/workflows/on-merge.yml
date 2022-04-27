@@ -18,4 +18,4 @@ jobs:
         id: qa-words
       # Use the output from the `qa-words action step` step
       - name: print the issue ID
-        run: echo "Issue ID='${{ steps.qa-words.outputs.issueId }}'"
+        run: echo "Issue ID='${{ steps.qa-words.outputs.issueIds }}'"
