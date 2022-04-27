@@ -15,6 +15,7 @@ function main() {
     // Is there a QA word related to the issue #?
     // example: "qa #1234"
     // example "QA bafsllc/clearwater#1234"
+    // example "qa #1234, QA bafsllc/clearwater#1234"
     const matches = /qa[^\S\r\n]+[\w/]*#([1-9]+)/dgi.exec(body);
     core.info(`matches=${JSON.stringify(matches)}`);
 
