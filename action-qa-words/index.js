@@ -16,21 +16,29 @@ function main() {
     // example: "qa #1234"
     // example "QA bafsllc/clearwater#1234"
     // example "qa #1234, QA bafsllc/clearwater#1234"
-    const matches = /qa[^\S\r\n]+[\w\/]*#([1-9]+)/gi.exec(body);
-    core.info(`matches=${JSON.stringify(matches)}`);
+    const regex = /qa[^\S\r\n]+[\w\/]*#([1-9]+)/gi;
+    const allMatches = [];
+    do {
+      const matches = regex.exec(body);
+      if (matches) {
+        allMatches.push(matches);
+      }
+    } while (matches);
 
-    if (matches?.length < 2) {
+    core.info(`allMatches=${JSON.stringify(allMatches)}`);
+
+    if (!allMatches.length) {
       core.setOutput("issueId", "");
       return;
     }
 
-    const arrMatches = Array.from(matches);
-    core.info(`arrMatches=${JSON.stringify(arrMatches)}`);
+    // const arrMatches = Array.from(matches);
+    // core.info(`arrMatches=${JSON.stringify(arrMatches)}`);
 
     const issueIds = [];
-    while (arrMatches.length) {
-      arrMatches.shift();
-      issueIds.push(arrMatches.shift());
+    while (allMatches.length) {
+      const match = allMatches.shift();
+      issueIds.push(match[1]);
     }
 
     core.setOutput("issueIds", issueIds.join(","));
