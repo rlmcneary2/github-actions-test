@@ -8,10 +8,10 @@ jobs:
     steps:
       - name: test
         run: echo "Step ran."
-      # # To use this repository's private action,
-      # # you must check out the repository
-      # - name: Checkout
-      #   uses: actions/checkout@v3
+      # To use this repository's private action,
+      # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v3
       # - name: qa-words action step
       #   uses: ./action-qa-words # Uses an action in the root directory
       #   id: qa-words
