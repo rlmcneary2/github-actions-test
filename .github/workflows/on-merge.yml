@@ -4,18 +4,17 @@ on:
       - main
     types: ["closed"]
 jobs:
-  qa-words-job:
+  qa-pipeline-job:
     runs-on: ubuntu-latest
     steps:
-      - name: test
-        run: echo "Step ran."
       # To use this repository's private action,
       # you must check out the repository
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@v3
       - name: qa-words action step
         uses: ./action-qa-words # Uses an action in the root directory
         id: qa-words
       # Use the output from the `qa-words action step` step
       - name: print the issue ID
-        run: echo "Issue ID='${{ steps.qa-words.outputs.issueIds }}'"
+        uses: ./action-qa-pipeline # Uses an action in the root directory
+        id: qa-pipeline
