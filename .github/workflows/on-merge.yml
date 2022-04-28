@@ -11,12 +11,13 @@ jobs:
       # you must check out the repository
       - name: checkout
         uses: actions/checkout@v3
+      # Find an "qa words"
       - name: qa-words action step
-        uses: ./action-qa-words # Uses an action in the root directory
         id: qa-words
+        uses: ./action-qa-words # Uses an action in the root directory
       # Use the output from the `qa-words action step` step
       - name: move issues to the QA pipeline
-        uses: ./action-qa-pipeline # Uses an action in the root directory
         id: qa-pipeline
+        uses: ./action-qa-pipeline # Uses an action in the root directory
         with:
-          issueIds: ${{steps.qa-words.outputs.*}}
+          issueIds: ${{steps.qa-words.outputs.issueIds}}
