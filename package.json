@@ -20,6 +20,7 @@
   "homepage": "https://github.com/rlmcneary2/github-actions-test#readme",
   "dependencies": {
     "@actions/core": "^1.7.0",
-    "@actions/github": "^5.0.1"
+    "@actions/github": "^5.0.1",
+    "node-fetch": "^3.2.4"
   }
 }
