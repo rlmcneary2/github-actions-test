@@ -6,8 +6,9 @@ function main() {
     // core.info(`context=\n${JSON.stringify(context, null, 2)}`);
 
     const issueIds = core.getInput("issueIds");
-    const ids = issueIds.split(",");
+    core.info(`issueIds='${issueIds}'`);
 
+    const ids = issueIds.split(",");
     core.info(`ids=${JSON.stringify(ids)}`);
 
     core.setOutput("issueIds", issueIds);
