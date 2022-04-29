@@ -41,7 +41,12 @@ async function main() {
         };
 
         const response = await fetch(url, init);
-        core.info(`response[${id}]=\n${JSON.stringify(response, null, 2)}`);
+        core.info(`response[${id}]: status=${response.status}`);
+
+        const text = await response.text();
+        core.info(
+          `response[${id}]: text=\n'${text ? `\n` + text + `\n` : ""}'`
+        );
       })
     );
   } catch (err) {
