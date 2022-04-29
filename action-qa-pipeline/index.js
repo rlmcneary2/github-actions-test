@@ -25,7 +25,7 @@ async function main() {
 
     await Promise.all(
       ids.map(async (id) => {
-        const url = new URL("https://https://api.zenhub.com");
+        const url = new URL("https://api.zenhub.com");
         url.pathname = `/p2/workspaces/${engineeringWorkspaceId}/repositories/${repoId}/issues/${id}/moves`;
 
         const init = {
