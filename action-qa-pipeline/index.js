@@ -28,12 +28,15 @@ async function main() {
         const url = new URL("https://api.zenhub.com");
         url.pathname = `/p2/workspaces/${engineeringWorkspaceId}/repositories/${repoId}/issues/${id}/moves`;
 
+        core.info(`URL[${id}]: url=${url.toString()}`);
+
         const init = {
           body: JSON.stringify({
             pipeline_id: qaPipelineId,
             position: "bottom",
           }),
           headers: {
+            "Content-Type": "application/json",
             "X-Authentication-Token":
               "85e7967f659573178f3d7cf6bdf6d51a3e723eb03447321d431c1d150fbd491d0eaeb00014ba73ed",
           },
