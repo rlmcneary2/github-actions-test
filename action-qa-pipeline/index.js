@@ -2,6 +2,21 @@ import core from "@actions/core";
 import { context } from "@actions/github";
 import fetch from "node-fetch";
 
+/**
+ * @param {string} issueNumber
+ * @returns {string}
+ */
+function cleanIssueNumber(issueNumber) {
+  let output = "";
+  for (let i = 0; i < issueNumber.length; i++) {
+    if (47 < issueNumber.charCodeAt(i) && issueNumber.charCodeAt(i) < 58) {
+      output += issueNumber[i];
+    }
+  }
+
+  return output;
+}
+
 async function main() {
   try {
     // core.info(`context=\n${JSON.stringify(context, null, 2)}`);
@@ -9,7 +24,7 @@ async function main() {
     const issueIds = core.getInput("issueIds");
     core.info(`issueIds='${issueIds}'`);
 
-    const ids = issueIds.split(",");
+    const issueNumbers = issueIds.split(",");
 
     // If this is from a PR was the PR merged>
     const merged = context.payload.pull_request?.merged;
@@ -24,11 +39,13 @@ async function main() {
     const qaPipelineId = "Z2lkOi8vcmFwdG9yL1BpcGVsaW5lLzI2ODAzMTE";
 
     await Promise.all(
-      ids.map(async (id) => {
+      issueNumbers.map(async (issueNumber) => {
         const url = new URL("https://api.zenhub.com");
-        url.pathname = `/p2/workspaces/${engineeringWorkspaceId}/repositories/${repoId}/issues/${id}/moves`;
+        url.pathname = `/p2/workspaces/${engineeringWorkspaceId}/repositories/${repoId}/issues/${cleanIssueNumber(
+          issueNumber
+        )}/moves`;
 
-        core.info(`URL[${id}]: url=${url.toString()}`);
+        core.info(`URL[${issueNumber}]: url=${url.toString()}`);
 
         const init = {
           body: JSON.stringify({
@@ -44,11 +61,11 @@ async function main() {
         };
 
         const response = await fetch(url, init);
-        core.info(`response[${id}]: status=${response.status}`);
+        core.info(`response[${issueNumber}]: status=${response.status}`);
 
         const text = await response.text();
         core.info(
-          `response[${id}]: text=\n'${text ? `\n` + text + `\n` : ""}'`
+          `response[${issueNumber}]: text=\n'${text ? `\n` + text + `\n` : ""}'`
         );
       })
     );
